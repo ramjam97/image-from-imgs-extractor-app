@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import tkinter as tk
 from tkinter import END, StringVar, filedialog
+from tkinter.ttk import Progressbar
 import cv2 as cv
 
 fileList = []
@@ -74,8 +75,19 @@ def run():
         if len(fileList) <= 0:
             tk.messagebox.showwarning(title="Oopps!", message="Please select image/s first")
             return
+
+        pb.stop()
+        pb["value"] = 0;
+        
+        counter = 1;
         for file in fileList:
             imageProcessor(file)
+
+            pb["value"] = (counter / len(fileList)) * 100
+            pb.update()
+
+            counter+=1
+
         tk.messagebox.showinfo(title="Extraction Completed!", message=f"Total extracted images : {len(extractedImgs)}")
         fileList.clear()
         extractedImgs.clear()
@@ -118,6 +130,9 @@ selectDIR_label.grid(row=0, column=0,sticky=tk.W+tk.E)
 outoutDIR_entry.grid(row=0, column=1, sticky=tk.W+tk.E)
 selectDIR_button.grid(row=0, column=2, sticky=tk.W+tk.E)
 
+pb = Progressbar(app, orient='horizontal', mode='determinate', length=100)
+pb.pack(fill=tk.X, padx=5, pady=2.5)
+
 app.title("Face Extractor")
-app.geometry('450x200')
+app.geometry('450x220')
 app.mainloop()
