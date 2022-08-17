@@ -76,6 +76,7 @@ def run():
             tk.messagebox.showwarning(title="Oopps!", message="Please select image/s first")
             return
 
+        run_button["state"] = "disabled"
         pb.stop()
         pb["value"] = 0;
         
@@ -93,14 +94,19 @@ def run():
         extractedImgs.clear()
         os.startfile(OUTPUT_PATH)
 
+        run_button["state"] = "normal"
+
 app = tk.Tk()
 
 button_frame = tk.Frame(app)
 button_frame.pack(fill=tk.X, side=tk.TOP, padx=5, pady=5)
 
+# select button
 selectImg_button = tk.Button(button_frame, text='Select Images', fg="blue", bg="white", command=selectFile, width=15)
 divider_label = tk.Label(button_frame)
-run_button = tk.Button(button_frame, text='Run', fg="white", bg="#0048d8", command=run, width=8)
+
+# run button
+run_button = tk.Button(button_frame, text='Run', fg="white", bg="#0048d8", command=run, width=8,)
 
 button_frame.columnconfigure(0)
 button_frame.columnconfigure(1, weight=1)
