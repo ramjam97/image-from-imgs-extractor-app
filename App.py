@@ -97,16 +97,16 @@ def run():
         run_button["state"] = "normal"
 
 app = tk.Tk()
-
-button_frame = tk.Frame(app)
+app.configure(bg="white")
+button_frame = tk.Frame(app, bg="white")
 button_frame.pack(fill=tk.X, side=tk.TOP, padx=5, pady=5)
 
 # select button
 selectImg_button = tk.Button(button_frame, text='Select Images', fg="blue", bg="white", command=selectFile, width=15)
-divider_label = tk.Label(button_frame)
+divider_label = tk.Label(button_frame, background="white")
 
 # run button
-run_button = tk.Button(button_frame, text='Run', fg="white", bg="#0048d8", command=run, width=8,)
+run_button = tk.Button(button_frame, text='Run', fg="white", bg="#0048d8", command=run, width=8)
 
 button_frame.columnconfigure(0)
 button_frame.columnconfigure(1, weight=1)
@@ -119,17 +119,16 @@ run_button.grid(row=0, column=2, sticky=tk.W+tk.E)
 list_selectedFiles = tk.Listbox(app, height=8)
 list_selectedFiles.pack(fill=tk.X, padx=5)
 
-outputDIR_frame = tk.Frame(app)
+outputDIR_frame = tk.Frame(app, background="white")
 outputDIR_frame.pack(fill=tk.X, padx=5, pady=2.5)
 
 outputDIR_frame.columnconfigure(0)
 outputDIR_frame.columnconfigure(1, weight=1, minsize=5)
 outputDIR_frame.columnconfigure(2)
 
-selectDIR_label = tk.Label(outputDIR_frame, text="Output Path:", width=10)
+selectDIR_label = tk.Label(outputDIR_frame, text="Output Path:", width=10, background="white")
 outoutDIR_val = StringVar()
-outoutDIR_entry = tk.Entry(outputDIR_frame, textvariable=outoutDIR_val, disabledbackground="white", disabledforeground="black", font=('bold', 11))
-outoutDIR_entry.configure(state="disabled")
+outoutDIR_entry = tk.Entry(outputDIR_frame, textvariable=outoutDIR_val, disabledbackground="white", disabledforeground="black", font=('bold', 11), state="disabled")
 selectDIR_button = tk.Button(outputDIR_frame, text='...', command=selectOutputDIR, bg="white", borderwidth=0.5, width=3)
 
 selectDIR_label.grid(row=0, column=0,sticky=tk.W+tk.E)
